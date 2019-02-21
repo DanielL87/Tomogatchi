@@ -11,59 +11,60 @@ class Pokemon extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-          selectedPokemon:'',  
-          pokemonList: [
-            {
-                name:'',
-                image: pikachu,   
-                species: 'Pikachu',
-                type: 'Electric',
-                description:'When several of these Pokémon gather, their electricity could build and cause lightning storms.',
-                key: 1
-            },
+            selectedPokemon: '',
+            pokemonList: [
+                {
+                    name: '',
+                    image: pikachu,
+                    species: 'Pikachu',
+                    type: 'Electric',
+                    description: 'When several of these Pokémon gather, their electricity could build and cause lightning storms.',
+                    key: 1
+                },
 
-            {
-                name:'',    
-                image: char,  
-                species: 'Charmander',
-                type: 'Fire',
-                description:'A flame burns on the tip of its tail from birth. It is said that a Charmander dies if its flame ever goes out.',
-                key: 2
-            },
+                {
+                    name: '',
+                    image: char,
+                    species: 'Charmander',
+                    type: 'Fire',
+                    description: 'A flame burns on the tip of its tail from birth. It is said that a Charmander dies if its flame ever goes out.',
+                    key: 2
+                },
 
-            {
-                name:'',  
-                image: squirt, 
-                species: 'Squirtle',
-                type: 'Water',
-                description:'After birth, its back swells and hardens into a shell. Powerfully sprays foam from its mouth.',
-                key: 3
-            },
-            {
-                name:'',    
-                species: 'Bulbasaur',
-                image: bulb, 
-                type: 'Grass/Poison',
-                description:'Solar Beam, Bulbasaurs strongest attack. Light is collected and formed into a powerful beam with intensive force.',
-                key: 4
-            },
+                {
+                    name: '',
+                    image: squirt,
+                    species: 'Squirtle',
+                    type: 'Water',
+                    description: 'After birth, its back swells and hardens into a shell. Powerfully sprays foam from its mouth.',
+                    key: 3
+                },
+                {
+                    name: '',
+                    species: 'Bulbasaur',
+                    image: bulb,
+                    type: 'Grass/Poison',
+                    description: 'Solar Beam, Bulbasaurs strongest attack. Light is collected and formed into a powerful beam with intensive force.',
+                    key: 4
+                },
 
-          ]
+            ]
 
         }
-    }    
-render() {
-    return (
-    <div>
-        <Switch >
-            <Route exact path='/' component={StartGame} render={(props) =>< Array {...props} pokemon={this.state.pokemonList} />} 
-            />
-            <Route path='/playGame' component={PlayGame} render={(props) =>(< Array {...props} pokemon={this.state.pokemonList} />)} 
-            />
-        </Switch>
-    </div>
-    )
-  }
+    }
+
+    render() {
+        return (
+            <div>
+                <Switch >
+                    <Route exact path='/' render={() => (<StartGame pokemon={this.state.pokemonList} />)}
+                    />
+                    <Route exact path='/playGame' render={() => (<PlayGame pokemon={this.state.pokemonList} />)}
+                    />
+                </Switch>
+            </div>
+        )
+    }
 }
 
 export default Pokemon

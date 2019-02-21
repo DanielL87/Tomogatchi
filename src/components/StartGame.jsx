@@ -18,7 +18,7 @@ class StartGame extends React.Component {
   }
 
   render() {
-    console.log(this.props.pokemon)
+    console.log(this.props)
     return (
       <div className='startGame'>
         <style jsx>{`
@@ -65,7 +65,7 @@ class StartGame extends React.Component {
 
       `}</style>
         <h1>Choose a Starter!</h1>
-        {/* <div className="pick">
+        <div className="pick">
           <div className="pokemon">
             <GifPlayer autoplay='true' gif={this.props.pokemon[0].image} width='200' />
             <br />
@@ -87,7 +87,7 @@ class StartGame extends React.Component {
             </ul>
           </div>
           <div className="pokemon">
-          <GifPlayer autoplay='true' gif={this.props.pokemon[2].image} width='200' />
+            <GifPlayer autoplay='true' gif={this.props.pokemon[2].image} width='200' />
             <br />
             <ul className='description'>
               <li className='species'>Species: {this.props.pokemon[2].species}</li>
@@ -97,7 +97,7 @@ class StartGame extends React.Component {
             </ul>
           </div>
           <div className="pokemon">
-          <GifPlayer autoplay='true' gif={this.props.pokemon[3].image} width='200' />
+            <GifPlayer autoplay='true' gif={this.props.pokemon[3].image} width='200' />
             <br />
             <ul className='description'>
               <li className='species'>Species: {this.props.pokemon[3].species}</li>
@@ -111,7 +111,7 @@ class StartGame extends React.Component {
         <form id='name'>
           <input type="text" placeholder="Choose Pokemon's Name" />
           <Link to='/playgame'><button type="">Start Game</button></Link>
-        </form> */}
+        </form>
       </div>
 
     )
