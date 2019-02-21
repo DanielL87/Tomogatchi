@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDom from 'react-dom'
 import { Link } from 'react-router-dom';
 import Pokemon from './Pokemon'
+import PropTypes from 'prop-types'
+
 
 var GifPlayer = require('react-gif-player');
 
@@ -9,16 +11,10 @@ class StartGame extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      show1: true,
-      show2: false,
-      show3: false,
-      show4: false,
-    }
+
   }
 
-  render() {
-    console.log(this.props)
+  render(props) {
     return (
       <div className='startGame'>
         <style jsx>{`
@@ -66,7 +62,7 @@ class StartGame extends React.Component {
       `}</style>
         <h1>Choose a Starter!</h1>
         <div className="pick">
-          <div className="pokemon">
+          <div className="pokemon" onClick={() => {this.props.onSelectPokemon(this.props.pokemon[0].key);}}>
             <GifPlayer autoplay='true' gif={this.props.pokemon[0].image} width='200' />
             <br />
             <ul className='description'>
@@ -76,7 +72,7 @@ class StartGame extends React.Component {
               <li>Description: {this.props.pokemon[0].description}</li>
             </ul>
           </div>
-          <div className="pokemon">
+          <div className="pokemon" onClick={() => {this.props.onSelectPokemon(this.props.pokemon[1].key);}}>
             <GifPlayer autoplay='true' gif={this.props.pokemon[1].image} width='200' />
             <br />
             <ul className='description'>
@@ -86,7 +82,7 @@ class StartGame extends React.Component {
               <li>Description: {this.props.pokemon[1].description}</li>
             </ul>
           </div>
-          <div className="pokemon">
+          <div className="pokemon" onClick={() => {this.props.onSelectPokemon(this.props.pokemon[2].key);}}> 
             <GifPlayer autoplay='true' gif={this.props.pokemon[2].image} width='200' />
             <br />
             <ul className='description'>
@@ -96,7 +92,7 @@ class StartGame extends React.Component {
               <li>Description: {this.props.pokemon[2].description}</li>
             </ul>
           </div>
-          <div className="pokemon">
+          <div className="pokemon" onClick={() => {this.props.onSelectPokemon(this.props.pokemon[3].key);}}>
             <GifPlayer autoplay='true' gif={this.props.pokemon[3].image} width='200' />
             <br />
             <ul className='description'>
@@ -118,3 +114,4 @@ class StartGame extends React.Component {
   }
 }
 export default StartGame
+

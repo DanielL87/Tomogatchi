@@ -6,12 +6,14 @@ import bulb from '../assets/images/bulbasaur.gif';
 import char from '../assets/images/charmander.gif';
 import squirt from '../assets/images/squirtle.gif';
 import { Switch, Route, Router } from 'react-router-dom';
+import PropTypes from 'prop-types'
+
 
 class Pokemon extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            selectedPokemon: '',
+            chosenPokemon:{},
             pokemonList: [
                 {
                     name: '',
@@ -19,7 +21,8 @@ class Pokemon extends React.Component {
                     species: 'Pikachu',
                     type: 'Electric',
                     description: 'When several of these Pokémon gather, their electricity could build and cause lightning storms.',
-                    key: 1
+                    key: 0,
+                    selected: false
                 },
 
                 {
@@ -28,7 +31,8 @@ class Pokemon extends React.Component {
                     species: 'Charmander',
                     type: 'Fire',
                     description: 'A flame burns on the tip of its tail from birth. It is said that a Charmander dies if its flame ever goes out.',
-                    key: 2
+                    key: 1,
+                    selected: false
                 },
 
                 {
@@ -37,27 +41,41 @@ class Pokemon extends React.Component {
                     species: 'Squirtle',
                     type: 'Water',
                     description: 'After birth, its back swells and hardens into a shell. Powerfully sprays foam from its mouth.',
-                    key: 3
+                    key: 2,
+                    selected: false
                 },
                 {
                     name: '',
-                    species: 'Bulbasaur',
                     image: bulb,
+                    species: 'Bulbasaur',
                     type: 'Grass/Poison',
                     description: 'Solar Beam, Bulbasaurs strongest attack. Light is collected and formed into a powerful beam with intensive force.',
-                    key: 4
+                    key: 3,
+                    selected: false
                 },
 
-            ]
+            ],
 
-        }
+        }, 
+
+        this.handleSelectPokemon = this.handleSelectPokemon.bind(this)
+    }
+
+    handleSelectPokemon (id) {
+        var selectedPokemon = Object.assign({}, this.state.pokemonList[id])
+        this.setState({
+            chosenPokemon: selectedPokemon
+        })
+        
     }
 
     render() {
+
+  
         return (
             <div>
                 <Switch >
-                    <Route exact path='/' render={() => (<StartGame pokemon={this.state.pokemonList} />)}
+                    <Route exact path='/' render={() => (<StartGame pokemon={this.state.pokemonList} onSelectPokemon={this.handleSelectPokemon} />)}
                     />
                     <Route exact path='/playGame' render={() => (<PlayGame pokemon={this.state.pokemonList} />)}
                     />
