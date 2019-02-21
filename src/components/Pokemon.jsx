@@ -5,7 +5,7 @@ import pikachu from '../assets/images/pikachu.gif';
 import bulb from '../assets/images/bulbasaur.gif';
 import char from '../assets/images/charmander.gif';
 import squirt from '../assets/images/squirtle.gif';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Router } from 'react-router-dom';
 
 class Pokemon extends React.Component {
     constructor(props) {
@@ -56,8 +56,10 @@ render() {
     return (
     <div>
         <Switch >
-            <Route exact path='/' component={StartGame} render={() =>(< Array pokemon={this.state.pokemonList} />)} />
-            <Route path='/playGame' component={PlayGame} render={() =>(< Array pokemon={this.state.pokemonList} />)} />
+            <Route exact path='/' component={StartGame} render={(props) =>< Array {...props} pokemon={this.state.pokemonList} />} 
+            />
+            <Route path='/playGame' component={PlayGame} render={(props) =>(< Array {...props} pokemon={this.state.pokemonList} />)} 
+            />
         </Switch>
     </div>
     )
