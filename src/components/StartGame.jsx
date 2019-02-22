@@ -2,19 +2,43 @@ import React from 'react'
 import ReactDom from 'react-dom'
 import { Link } from 'react-router-dom';
 import Pokemon from './Pokemon'
-import PropTypes from 'prop-types'
+
 
 
 var GifPlayer = require('react-gif-player');
 
 class StartGame extends React.Component {
 
+
   constructor(props) {
     super(props)
-
+    this.state = {
+      name:""
+    };
+    this.formSubmission = this.formSubmission.bind(this); 
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  render(props) {
+  formSubmission(name){
+  this.props.startButton(name)
+  }
+
+  handleChange(event) {
+    this.setState({name: event.target.value});
+  }
+  
+
+  render() {
+    
+    let initial = '';
+    if(this.props.chosenPokemon != null){
+      initial =          
+         <div>
+          <h3>You've chosen {this.props.chosenPokemon.species}!</h3>
+        </div> 
+      }  
+
+
     return (
       <div className='startGame'>
         <style jsx>{`
@@ -58,7 +82,6 @@ class StartGame extends React.Component {
         .pokemon:hover > .description {
           display: initial;
         }
-
       `}</style>
         <h1>Choose a Starter!</h1>
         <div className="pick">
@@ -103,11 +126,22 @@ class StartGame extends React.Component {
             </ul>
           </div>
         </div>
+
         <br />
         <form id='name'>
-          <input type="text" placeholder="Choose Pokemon's Name" />
-          <Link to='/playgame'><button type="">Start Game</button></Link>
+          <input 
+          id='nameInput'
+          type="text" 
+          placeholder="Choose Pokemon's Name" 
+          onChange={this.handleChange}
+          />
+          <Link to='/playGame'>
+            <button onClick={() => {this.formSubmission(this.state.name);}}>Start Game</button>
+          </Link>
         </form>
+        <div>
+          {initial}
+        </div>
       </div>
 
     )

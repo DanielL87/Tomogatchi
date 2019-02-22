@@ -1,10 +1,10 @@
 import React from 'react'
 import Button from './Button'
 
-function Header() {
+function Header(props) {
   return (
     <div>
-      <Button />
+      <Button battle={props.battle} pokemon={props.pokemon} />
     </div>
   )
 }

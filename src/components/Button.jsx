@@ -1,9 +1,9 @@
 import React from 'react'
 
-function Button() {
+function Button(props) {
   return (
     <div>
-      <button>Button Works</button>
+      <button onClick={props.battle}>Battle</button>
       <hr/>
     </div>
   )

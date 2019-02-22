@@ -6,7 +6,8 @@ import bulb from '../assets/images/bulbasaur.gif';
 import char from '../assets/images/charmander.gif';
 import squirt from '../assets/images/squirtle.gif';
 import { Switch, Route, Router } from 'react-router-dom';
-import PropTypes from 'prop-types'
+import Header from './Header.jsx'
+
 
 
 class Pokemon extends React.Component {
@@ -22,7 +23,7 @@ class Pokemon extends React.Component {
                     type: 'Electric',
                     description: 'When several of these Pokémon gather, their electricity could build and cause lightning storms.',
                     key: 0,
-                    selected: false
+                    selected: false,
                 },
 
                 {
@@ -59,14 +60,41 @@ class Pokemon extends React.Component {
         }, 
 
         this.handleSelectPokemon = this.handleSelectPokemon.bind(this)
+        this.startButton = this.startButton.bind(this)
+        this.battleButton = this.battleButton.bind(this)
     }
 
     handleSelectPokemon (id) {
+        var tmpList = this.state.pokemonList.slice();
+        tmpList[id].selected = true;
         var selectedPokemon = Object.assign({}, this.state.pokemonList[id])
         this.setState({
-            chosenPokemon: selectedPokemon
+            chosenPokemon: selectedPokemon,
+            pokemonList: tmpList 
         })
-        
+    }
+
+    startButton (inputName) {
+        var chosenOne = this.state.chosenPokemon;
+        chosenOne.name = inputName;
+        chosenOne.level= 1;
+        chosenOne.health= 50;
+        chosenOne.maxHealth=50;
+        chosenOne.experience=0;
+        chosenOne.maxExperience=100;
+        this.setState({
+            chosenPokemon: chosenOne
+        })
+    }
+
+    battleButton(){
+    var chosenOne = this.state.chosenPokemon;
+    chosenOne.level++
+        this.setState({   
+        chosenPokemon: chosenOne   
+       
+        })
+        console.log('clicked')
     }
 
     render() {
@@ -74,10 +102,16 @@ class Pokemon extends React.Component {
   
         return (
             <div>
+                <Header battle={this.battleButton} pokemon={this.state.chosenPokemon} />
                 <Switch >
-                    <Route exact path='/' render={() => (<StartGame pokemon={this.state.pokemonList} onSelectPokemon={this.handleSelectPokemon} />)}
+                    <Route exact path='/' render={() => (<StartGame 
+                        pokemon={this.state.pokemonList} 
+                        onSelectPokemon={this.handleSelectPokemon} 
+                        startButton={this.startButton} 
+                        chosenPokemon={this.state.chosenPokemon}/>)}
                     />
-                    <Route exact path='/playGame' render={() => (<PlayGame pokemon={this.state.pokemonList} />)}
+                    <Route path='/playGame' render={() => (<PlayGame pokemon={this.state.chosenPokemon} 
+                    />)}
                     />
                 </Switch>
             </div>
